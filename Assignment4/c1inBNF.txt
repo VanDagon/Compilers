@@ -1,0 +1,50 @@
+program ::= /*empty*/ | declassignment program ';' | functiondefinition program 
+
+functiondefinition ::= type id '('/*empty*/')''{' statementlist '}' |  type id '('parameterlist')' '{' statementlist '}' 
+
+parameterlist ::= type id | parameterlist ',' type id
+
+functioncall ::= id '(' ')' | id '(' A assignment ')'
+
+A ::= /*empty*/ | assignment ',' A
+
+statementlist ::= /*empty*/ | block statementlist 
+
+block ::= '{' statementlist '}' | statement
+
+statement ::= ifstatement | forstatement | whilestatement | returnstatement ";"
+| dowhilestatement ";" | printf ";" | declassignment ";" | statassignment ";"
+| functioncall ";"
+
+ifstatement ::= 'if' '(' assignment ')' block | ifstatement 'else' block
+
+forstatement ::= for '(' statassignment | declassignment ';' expr ';' statassignment ')' block
+
+dowhilestatement ::= 'do' block 'while(' assignment ')'
+
+whilestatement ::= 'while' '(' assignment ')' block
+
+returnstatement ::= 'return' | 'return' assignment
+
+printf ::= 'printf' '(' assignment | 'CONST_STRING' ')'
+
+declassignment ::= type id | type id '=' assignment
+
+type ::= 'boolean' | 'float' | 'int' | 'void'
+
+statassignment ::= id '=' assignment
+
+assignment ::= id '=' assignment | expr
+
+expr ::= simpexpr | simpexpr '==' expr | simpexpr '!=' expr | simpexpr '<=' expr | simpexpr '>=' expr | simpexpr '<' expr | simpexpr '>' expr
+
+simpexpr ::= '-' term D | term D
+
+D ::= '+' term D | '-' term D | '||' term D | /*empty*/
+
+term ::= factor | factor '*' term | factor  '/' term | factor '&&' term
+
+factor	::= <CONST_INT> |<CONST_FLOAT> | <CONST_BOOLEAN> | functioncall | id | '(' assignment ')'
+
+id ::= <ID>
+
