@@ -1,11 +1,3 @@
-//
-//  stack.c
-//  stack
-//
-//  Created by Taeshin 578277, Junhyuk KO 531806 on 29.04.19.
-//  Copyright © 2019 TS. All rights reserved.
-//
-
 #include <stdlib.h>
 #include <stdio.h>
 #include "stack.h"
